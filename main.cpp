@@ -13,15 +13,27 @@ public:
     {
         m_LogLevel=level;
     }
+    void Error(const char* message)
+    {
+        if (m_LogLevel>=LogLevelError)
+            std::cout<<"[ERROR]:"<<message<<std::endl;
+    }
     void Warn(const char* message)
     {
-
+        if (m_LogLevel>=LogLevelWarning)
+            std::cout<<"[WARNING]:"<<message<<std::endl;
+    }
+    void Info(const char* message)
+    {
+        if (m_LogLevel>=LogLevelInfo)
+            std::cout<<"[INFO]:"<<message<<std::endl;
     }
 };
 int main() {
     Log log;
-    log.SetLevel(0);
+    log.SetLevel(log.LogLevelError);
+    log.Error("hello!");
     log.Warn("Hello!");
-    std::cout << "Hello, World!" << std::endl;
+    log.Info("hello!");
     return 0;
 }
